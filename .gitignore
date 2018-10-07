@@ -77,5 +77,8 @@ modules.xml
 .idea/misc.xml
 *.ipr
 
+.idea/workspace.xml
+.gradle/4.8/fileHashes/fileHashes.lock
+.gradle/4.8/fileHashes/fileHashes.bin
 
 # End of https://www.gitignore.io/api/intellij+iml
