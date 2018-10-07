@@ -8,7 +8,7 @@ plugins {
 group 'project'
 version '1.0-SNAPSHOT'
 
-mainClassName = 'project.JDAbot.BotLauncher'
+mainClassName = 'src/main/java/project/JDAbot/BotLauncher.java'
 
 version '1.0'
 def jdaVersion = '3.3.1_308'
