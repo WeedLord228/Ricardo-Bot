@@ -11,9 +11,9 @@ version '1.0-SNAPSHOT'
 mainClassName = 'src/main/java/project/JDAbot/BotLauncher.java'
 
 version '1.0'
-def jdaVersion = '3.3.1_308'
+def jdaVersion = '3.8.0_435'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.8                           
 
 repositories {
     jcenter()

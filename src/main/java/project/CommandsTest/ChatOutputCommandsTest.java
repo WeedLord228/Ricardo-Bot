@@ -3,8 +3,6 @@ package project.CommandsTest;
 import org.junit.jupiter.api.Test;
 import project.JDAbot.ChatOutputCommands;
 
-import java.lang.reflect.Type;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChatOutputCommandsTest {
