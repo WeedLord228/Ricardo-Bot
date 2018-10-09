@@ -14,12 +14,16 @@ class ChatOutputCommandsTest {
     }
 
     @Test
-    void sumTest() {
-        double a = 2;
-        double b = 3;
-        assertEquals(ChatOutputCommands.sum(a,b), Double.toString(a+b));
+    void sumTest1() {
+        String[] args = {"3","2"};
+        assertEquals(ChatOutputCommands.sum(args), "5");
     }
-
+//    "Неправильный ввод, попробуйте ввести число"
+    @Test
+    void sumTest2() {
+        String[] args = {"a","2"};
+        assertEquals(ChatOutputCommands.sum(args), "Неправильный ввод, попробуйте ввести число");
+    }
     @Test
     void helpTest() {
         String a = "На данный момент доступны команды в формате: " +

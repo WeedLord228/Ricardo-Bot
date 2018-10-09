@@ -7,10 +7,24 @@ public class ChatOutputCommands
         return "Я живой!";
     }
 
-    public  static  String sum(double a, double b)
+    public  static  String sum(String[] args)
     {
+        try
+        {
+            double a = Double.parseDouble(args[1]);
+            double b = Double.parseDouble(args[2]);
+        }
+        catch (Exception e)
+        {
+            return "Неправильный ввод, попробуйте ввести число";
+        }
 
-        return Double.toString(a + b);
+        if ((Double.parseDouble(args[1]) >= Double.MAX_VALUE/2 -1 &&
+                Double.parseDouble(args[2]) >= Double.MAX_VALUE/2 - 1))
+            return "Слишком большие числа";
+
+        return Double.toString(Double.parseDouble(args[1]) +
+                Double.parseDouble(args[2]));
 
     }
 
@@ -42,9 +56,7 @@ public class ChatOutputCommands
                return ChatOutputCommands.ping();
             //Обычный пинг
             case "!sum":
-                double a = Double.parseDouble(args[1]);
-                double b = Double.parseDouble(args[2]);
-                return ChatOutputCommands.sum(a, b);
+                return ChatOutputCommands.sum(args);
             //Команда вычисления суммы, после команды должны идти два числа разделенные пробелом.
             case "!help":
                 return ChatOutputCommands.help();
