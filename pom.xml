@@ -10,7 +10,7 @@
                 <version>2.0.6</version>
                 <configuration>
                 <processTypes>
-                <web>java $JAVA_OPTS -cp target/classes;target/dependency/BotLauncher.jar</web>
+                <web>java $JAVA_OPTS -cp target/classes;JDAbot/BotLauncher.jar</web>
                 </processTypes>
                 </configuration>
             </plugin>
