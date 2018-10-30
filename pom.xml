@@ -8,15 +8,15 @@
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>2.0.6</version>
-                <configuration>
-                <processTypes>
-                <web>java $JAVA_OPTS -cp target/classes;JDAbot/BotLauncher.jar</web>
-                </processTypes>
-                </configuration>
             </plugin>
         </plugins>
 
     </build>
+    <!--<configuration>-->
+    <!--<processTypes>-->
+    <!--<web>java $JAVA_OPTS -cp target/classes;JDAbot/BotLauncher.jar</web>-->
+    <!--</processTypes>-->
+    <!--</configuration>-->
 
 
     <modelVersion>4.0.0</modelVersion>
