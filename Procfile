@@ -1,1 +1,1 @@
-worker: java -jar src\main\java\JDAbot\BotLauncher.java
+worker: java -jar target/classes/JDAbot/BotLauncher
