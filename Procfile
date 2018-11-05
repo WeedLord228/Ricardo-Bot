@@ -1,1 +1,1 @@
-worker: java -jar target/classes/JDAbot/BotLauncher
+worker: sh target/bin/main
