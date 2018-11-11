@@ -1,11 +1,18 @@
 package JDAbot;
 
 
-
+import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack;
+
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
@@ -31,25 +38,49 @@ public class MyListener extends ListenerAdapter {
 
             textChannel.sendMessage(ChatOutputCommands.executeCommand(args)).queue();
             //Распознование и выполнение команды
+        }
 
-            if(args[0].toLowerCase() == "!play")
-            {
-                Guild guild = event.getGuild();
-                //Получаем текущую гильдию
+        if (event.getMessage().getContentRaw().startsWith("$")) {
 
-                VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
-                //Получаем голосовой канал пользователя
 
-                AudioManager manager = guild.getAudioManager();
+            Guild guild = event.getGuild();
+            //Получаем текущую гильдию
 
-                AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
-                AudioSourceManagers.registerRemoteSources(playerManager);
+            VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
+            //Получаем голосовой канал пользователя
 
-                AudioPlayer player =playerManager.createPlayer();
+            AudioManager manager = guild.getAudioManager();
 
-                manager.setSendingHandler(new MySendHandler(player));
-                manager.openAudioConnection(voiceChannel);
-            }
+            final AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
+            AudioSourceManagers.registerRemoteSources(playerManager);
+
+            final AudioPlayer player = playerManager.createPlayer();
+
+            YoutubeAudioSourceManager youtubeASM = new YoutubeAudioSourceManager();
+
+            manager.setSendingHandler(new MySendHandler(player));
+            manager.openAudioConnection(voiceChannel);
+
+            playerManager.registerSourceManager(youtubeASM);
+
+            playerManager.loadItem("YOUTUBE_TRACK_ID_TO_LOAD", new AudioLoadResultHandler() {
+
+                public void trackLoaded(AudioTrack audioTrack) {
+                player.playTrack(audioTrack);
+                }
+
+                public void playlistLoaded(AudioPlaylist audioPlaylist) {
+
+                }
+
+                public void noMatches() {
+
+                }
+
+                public void loadFailed(FriendlyException e) {
+
+                }
+            });
         }
     }
 }

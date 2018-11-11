@@ -12,18 +12,17 @@ public class MySendHandler implements AudioSendHandler {
         this.audioPlayer = audioPlayer;
     }
 
-    @Override
+
     public boolean canProvide() {
         lastFrame = audioPlayer.provide();
         return lastFrame != null;
     }
 
-    @Override
+
     public byte[] provide20MsAudio() {
         return lastFrame.getData();
     }
 
-    @Override
     public boolean isOpus() {
         return true;
     }
