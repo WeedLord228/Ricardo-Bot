@@ -2,10 +2,7 @@ package JDAbot;
 
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
-import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
@@ -19,7 +16,7 @@ import net.dv8tion.jda.core.managers.AudioManager;
 
 
 public class MyListener extends ListenerAdapter {
-
+    //Нужно создать плеер заранне, чтобы при каждом событии он не сбрасывался
     private BotPlayer botPlayer = new BotPlayer();
 
     @Override
@@ -62,8 +59,10 @@ public class MyListener extends ListenerAdapter {
 
                 manager.setSendingHandler(new MySendHandler(botPlayer.player));
                 manager.openAudioConnection(voiceChannel);
+                //Подключение бота в голосовой канал
 
                 botPlayer.playerManager.registerSourceManager(youtubeASM);
+                //регистрация внешних источников треков
 
                 botPlayer.playerManager.loadItem(youTubeId, new AudioLoadResultHandler() {
 
@@ -82,11 +81,16 @@ public class MyListener extends ListenerAdapter {
                     public void loadFailed(FriendlyException e) {
 
                     }
-
-
                 });
 
-                event.getChannel().sendMessage("Сос" + botPlayer.scheduler.queue.size()).queue();
+                event.getChannel().sendMessage("Ваш трек в очереди на " +
+                        (botPlayer.scheduler.queue.size() + 1)
+                        + "-м месте.").queue();
+            }
+
+            if (args[0].equals("$skip"))
+            {
+                botPlayer.scheduler.nextTrack();
             }
 
         }
