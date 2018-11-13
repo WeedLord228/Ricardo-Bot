@@ -39,8 +39,22 @@ public class MyListener extends ListenerAdapter {
         if (event.getMessage().getContentRaw().startsWith("$")) {
             String[] args = event.getMessage().getContentRaw().split(" ");
 
+            final MessageChannel messageChannel = event.getChannel();
+
             if (args[0].equals("$play")) {
+                try {
+                    String youTubeId = args[1].split("v=")[1].substring(0, 11);
+                }
+                catch (Exception e)
+                {
+                    messageChannel.sendMessage("Неправильный формат id").queue();
+                }
+
                 String youTubeId = args[1].split("v=")[1].substring(0, 11);
+
+
+
+
 
                 Guild guild = event.getGuild();
                 //Получаем текущую гильдию
@@ -66,8 +80,12 @@ public class MyListener extends ListenerAdapter {
 
                 botPlayer.playerManager.loadItem(youTubeId, new AudioLoadResultHandler() {
 
-                    public void trackLoaded(AudioTrack audioTrack) {
+                    public void trackLoaded(AudioTrack audioTrack)
+                    {
                         botPlayer.scheduler.queue(audioTrack);
+                        messageChannel.sendMessage("Ваш трек в очереди на " +
+                                (botPlayer.scheduler.queue.size() + 1)
+                                + "-м месте.").queue();
                     }
 
                     public void playlistLoaded(AudioPlaylist audioPlaylist) {
@@ -75,17 +93,17 @@ public class MyListener extends ListenerAdapter {
                     }
 
                     public void noMatches() {
-
+                        messageChannel.sendMessage("Трек не найден").queue();
+                        return;
                     }
 
                     public void loadFailed(FriendlyException e) {
-
+                        messageChannel.sendMessage("Не удалось загрузить").queue();
+                        return;
                     }
                 });
 
-                event.getChannel().sendMessage("Ваш трек в очереди на " +
-                        (botPlayer.scheduler.queue.size() + 1)
-                        + "-м месте.").queue();
+
             }
 
             if (args[0].equals("$skip"))
