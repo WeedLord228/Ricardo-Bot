@@ -41,6 +41,10 @@ public class MyListener extends ListenerAdapter {
 
             final MessageChannel messageChannel = event.getChannel();
 
+            Guild guild = event.getGuild();
+            AudioManager manager = guild.getAudioManager();
+            manager.setSendingHandler(new MySendHandler(botPlayer.player));
+
             if (args[0].equals("$play")) {
                 if (args[1].length() < 11)
                 {
@@ -50,14 +54,8 @@ public class MyListener extends ListenerAdapter {
 
                 String youTubeId = args[1].split("v=")[1].substring(0, 11);
 
-
-                Guild guild = event.getGuild();
-                //Получаем текущую гильдию
-
                 VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
                 //Получаем голосовой канал пользователя
-
-                AudioManager manager = guild.getAudioManager();
 
 //                final AudioPlayerManager playerManager = botPlayer.playerManager;
                 AudioSourceManagers.registerRemoteSources(botPlayer.playerManager);
@@ -104,6 +102,11 @@ public class MyListener extends ListenerAdapter {
             if (args[0].equals("$skip"))
             {
                 botPlayer.scheduler.nextTrack();
+            }
+
+            if (args[0].equals("$disconnect"))
+            {
+                manager.closeAudioConnection();
             }
 
         }

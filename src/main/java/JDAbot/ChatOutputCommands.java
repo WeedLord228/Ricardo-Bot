@@ -35,7 +35,9 @@ public class ChatOutputCommands
                 "\n!echo some text - Повторяет текст от лица бота." +
                 "\n Ключ $ для команд, которые работают с аудио" +
                 "\n $play [track identifier] - track identifier одинадцать символов вместе с \"v=\" в ссылке на видео, ставит эту песню" +
-                "\n $skip - пропустить текущий трек";
+                "\n $skip - пропустить текущий трек" +
+                "\n $disconnect - отключить бота от голосового канала"
+                ;
     }
     public static String echo(String[] args)
     {
