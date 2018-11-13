@@ -19,6 +19,7 @@ public class MyListener extends ListenerAdapter {
     //Нужно создать плеер заранне, чтобы при каждом событии он не сбрасывался
     private BotPlayer botPlayer = new BotPlayer();
 
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getMessage().getContentRaw().startsWith("!"))
@@ -40,6 +41,10 @@ public class MyListener extends ListenerAdapter {
             String[] args = event.getMessage().getContentRaw().split(" ");
 
             final MessageChannel messageChannel = event.getChannel();
+            Guild guild = event.getGuild();
+            //Получаем текущую гильдию
+            AudioManager manager = guild.getAudioManager();
+            manager.setSendingHandler(new MySendHandler(botPlayer.player));
 
             if (args[0].equals("$play")) {
                 try {
@@ -56,13 +61,12 @@ public class MyListener extends ListenerAdapter {
 
 
 
-                Guild guild = event.getGuild();
-                //Получаем текущую гильдию
+
 
                 VoiceChannel voiceChannel = event.getMember().getVoiceState().getChannel();
                 //Получаем голосовой канал пользователя
 
-                AudioManager manager = guild.getAudioManager();
+
 
 //                final AudioPlayerManager playerManager = botPlayer.playerManager;
                 AudioSourceManagers.registerRemoteSources(botPlayer.playerManager);
@@ -71,7 +75,7 @@ public class MyListener extends ListenerAdapter {
 
                 YoutubeAudioSourceManager youtubeASM = new YoutubeAudioSourceManager();
 
-                manager.setSendingHandler(new MySendHandler(botPlayer.player));
+
                 manager.openAudioConnection(voiceChannel);
                 //Подключение бота в голосовой канал
 
@@ -109,6 +113,11 @@ public class MyListener extends ListenerAdapter {
             if (args[0].equals("$skip"))
             {
                 botPlayer.scheduler.nextTrack();
+            }
+
+            if (args[0].equals("$disconnect"))
+            {
+            manager.closeAudioConnection();
             }
 
         }
