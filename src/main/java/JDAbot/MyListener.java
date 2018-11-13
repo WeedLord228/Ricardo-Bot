@@ -42,18 +42,13 @@ public class MyListener extends ListenerAdapter {
             final MessageChannel messageChannel = event.getChannel();
 
             if (args[0].equals("$play")) {
-                try {
-                    String youTubeId = args[1].split("v=")[1].substring(0, 11);
-                }
-                catch (Exception e)
+                if (args[1].length() < 11)
                 {
-                    messageChannel.sendMessage("Неправильный формат id").queue();
+                    messageChannel.sendMessage("Неправильный track identifier, попробуйте обратиться к комнде !help").queue();
+                    return;
                 }
 
                 String youTubeId = args[1].split("v=")[1].substring(0, 11);
-
-
-
 
 
                 Guild guild = event.getGuild();

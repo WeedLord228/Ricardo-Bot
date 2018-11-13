@@ -34,7 +34,7 @@ public class ChatOutputCommands
                 "\n!sum arg1 arg2 - Для вычисления суммы двух действительных чисел." +
                 "\n!echo some text - Повторяет текст от лица бота." +
                 "\n Ключ $ для команд, которые работают с аудио" +
-                "\n $play [track identifier] - track identifier одинадцать символов после \"v=\" в ссылке на видео" +
+                "\n $play [track identifier] - track identifier одинадцать символов вместе с \"v=\" в ссылке на видео, ставит эту песню" +
                 "\n $skip - пропустить текущий трек";
     }
     public static String echo(String[] args)
