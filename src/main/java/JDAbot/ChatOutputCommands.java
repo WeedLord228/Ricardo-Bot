@@ -32,8 +32,14 @@ public class ChatOutputCommands
         return "На данный момент доступны команды в формате: " +
                 "\n!ping - Для проверки жизнеспособности бота." +
                 "\n!sum arg1 arg2 - Для вычисления суммы двух действительных чисел." +
-                "\n!echo some text - Повторяет текст от лица бота.";
+                "\n!echo some text - Повторяет текст от лица бота." +
+                "\n Ключ $ для команд, которые работают с аудио" +
+                "\n $play [track identifier] - track identifier одинадцать символов вместе с \"v=\" в ссылке на видео, ставит эту песню" +
+                "\n $skip - пропустить текущий трек" +
+                "\n $disconnect - отключить бота от голосового канала"
+                ;
     }
+
     public static String echo(String[] args)
     {
         StringBuilder tempStr = new StringBuilder();
@@ -65,6 +71,5 @@ public class ChatOutputCommands
         }
         return "Неправильная команда, обратитесь к команде !help";
     }
-
 }
 
