@@ -1,6 +1,9 @@
-package JDAbot;
+package JDAbot.Main;
 
 
+import JDAbot.AudioDependencies.BotPlayer;
+import JDAbot.AudioDependencies.MySendHandler;
+import JDAbot.Logic.StringOutputCommands;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
@@ -8,6 +11,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -21,6 +25,9 @@ public class MyListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        if (event.getAuthor().isBot())
+            return;
+
         if (event.getMessage().getContentRaw().startsWith("!"))
         //Мы хотим чтобы бот обрабатывал только команды
         {
@@ -32,8 +39,10 @@ public class MyListener extends ListenerAdapter {
             MessageChannel textChannel = event.getChannel();
             //Канал, из которго пришло сообщение
 
-            textChannel.sendMessage(ChatOutputCommands.executeCommand(args)).queue();
+            textChannel.sendMessage(StringOutputCommands.executeCommand(args)).queue();
             //Распознование и выполнение команды
+
+            textChannel.sendMessage(Message)
         }
 
         if (event.getMessage().getContentRaw().startsWith("$")) {

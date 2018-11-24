@@ -1,6 +1,6 @@
-package JDAbot;
+package JDAbot.Logic;
 
-public class ChatOutputCommands
+public class StringOutputCommands
 {
     public static String ping() {
         return "Я живой!";
@@ -56,16 +56,16 @@ public class ChatOutputCommands
         String command = args[0].toLowerCase();
 
         if ("!ping".equals(command)) {
-            return ChatOutputCommands.ping();
+            return StringOutputCommands.ping();
             //Обычный пинг
         } else if ("!sum".equals(command)) {
-            return ChatOutputCommands.sum(args);
+            return StringOutputCommands.sum(args);
             //Команда вычисления суммы, после команды должны идти два числа разделенные пробелом.
         } else if ("!help".equals(command)) {
-            return ChatOutputCommands.help();
+            return StringOutputCommands.help();
             //Справка по всем имеющимся командам.
         } else if ("!echo".equals(command)) {
-            return ChatOutputCommands.echo(args);
+            return StringOutputCommands.echo(args);
             //Повторяет текст от лица бота.
         }
         return "Неправильная команда, обратитесь к команде !help";
