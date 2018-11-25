@@ -77,7 +77,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>JDAbot.BotLauncher</mainClass>
+                            <mainClass>JDAbot.Main.BotLauncher</mainClass>
                             <name>main</name>
                         </program>
                     </programs>
@@ -93,5 +93,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
