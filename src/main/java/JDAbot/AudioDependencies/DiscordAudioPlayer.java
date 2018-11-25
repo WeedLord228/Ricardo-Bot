@@ -18,23 +18,26 @@ public class DiscordAudioPlayer
 
     //В этом классе проходит работа с плеером и очередью треков.
 
-    public DiscordAudioPlayer(Guild guild, AudioSourceManager[] sourceManagers)
+    public DiscordAudioPlayer(AudioSourceManager[] sourceManagers)
     {
         this.playerManager = new DefaultAudioPlayerManager();
-        this.guild = guild;
         this.player = playerManager.createPlayer();
         this.scheduler = new TrackScheduler(player);
-        this.audioManager = guild.getAudioManager();
         player.addListener(scheduler);
-        audioManager.setSendingHandler(new MySendHandler(player));
         for (int i =0;i < sourceManagers.length; i++)
             playerManager.registerSourceManager(sourceManagers[i]);
-        //Пока у нас только один sendHandler мы не хотим задавать его отдельно
     }
 
     public void openAudioConnection(VoiceChannel voiceChannel)
     {
         audioManager.openAudioConnection(voiceChannel);
+    }
+
+    public void setGuildAndManager(Guild guild)
+    {
+        this.guild = guild;
+        this.audioManager = guild.getAudioManager();
+        audioManager.setSendingHandler(new MySendHandler(player));
     }
 }
 

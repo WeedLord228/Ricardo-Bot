@@ -16,6 +16,10 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class MyListener extends ListenerAdapter {
 
 
+    //Нужно создать плеер заранне, чтобы при каждом событии он не сбрасывался
+    DiscordAudioPlayer discordAudioPlayer = new DiscordAudioPlayer(
+            new AudioSourceManager[] {new YoutubeAudioSourceManager()});
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getAuthor().isBot())
@@ -41,9 +45,7 @@ public class MyListener extends ListenerAdapter {
 
             if (event.getMessage().getContentRaw().startsWith("$"))
             {
-                //Нужно создать плеер заранне, чтобы при каждом событии он не сбрасывался
-                DiscordAudioPlayer discordAudioPlayer = new DiscordAudioPlayer(guild,
-                        new AudioSourceManager[] {new YoutubeAudioSourceManager()});
+                discordAudioPlayer.setGuildAndManager(guild);
 
                 AudioCommandsHandler audioCommandsHandler = new AudioCommandsHandler(discordAudioPlayer);
 
