@@ -4,8 +4,6 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager;
-import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
-import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.managers.AudioManager;

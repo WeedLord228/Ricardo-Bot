@@ -3,21 +3,14 @@ package JDAbot.Main;
 
 import JDAbot.AudioDependencies.AudioCommandsHandler;
 import JDAbot.AudioDependencies.DiscordAudioPlayer;
-import JDAbot.AudioDependencies.MySendHandler;
 import JDAbot.Logic.StringOutputCommands;
-import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager;
-import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
-import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import net.dv8tion.jda.core.managers.AudioManager;
 
 
 public class MyListener extends ListenerAdapter {
@@ -48,8 +41,6 @@ public class MyListener extends ListenerAdapter {
 
             if (event.getMessage().getContentRaw().startsWith("$"))
             {
-
-                YoutubeAudioSourceManager yotubeASM = new YoutubeAudioSourceManager();
                 //Нужно создать плеер заранне, чтобы при каждом событии он не сбрасывался
                 DiscordAudioPlayer discordAudioPlayer = new DiscordAudioPlayer(guild,
                         new AudioSourceManager[] {new YoutubeAudioSourceManager()});
