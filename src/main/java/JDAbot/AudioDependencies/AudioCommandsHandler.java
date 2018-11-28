@@ -21,9 +21,9 @@ public class AudioCommandsHandler {
             play(args,voiceChannel,messageChannel);
         if (args[0].equals("$disconnect"))
             disconnect(args);
-        if (args[0].equals("skip"))
+        if (args[0].equals("$skip"))
             skip(args);
-        if (args[0].equals("volume"))
+        if (args[0].equals("$volume"))
             setVolume(args,messageChannel);
     }
 
