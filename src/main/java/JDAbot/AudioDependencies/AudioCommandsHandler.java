@@ -23,6 +23,8 @@ public class AudioCommandsHandler {
             disconnect(args);
         if (args[0].equals("skip"))
             skip(args);
+        if (args[0].equals("volume"))
+            setVolume(args,messageChannel);
     }
 
     private void loadAndQueue (String[] args, final MessageChannel messageChannel)
@@ -79,6 +81,12 @@ public class AudioCommandsHandler {
     private void skip(String[] args)
     {
         discordAudioPlayer.scheduler.nextTrack();
+    }
+
+    private void setVolume(String[] args,MessageChannel messageChannel)
+    {
+        discordAudioPlayer.scheduler.setVolume(Integer.parseInt(args[1]));
+        messageChannel.sendMessage("Текущая громкость" + discordAudioPlayer.player.getVolume()).queue();
     }
 }
 
