@@ -25,8 +25,8 @@ public class MyListener extends ListenerAdapter {
         if (event.getAuthor().isBot())
             return;
 
-        if (event.getMessage().getContentRaw().startsWith("!") ||
-                event.getMessage().getContentRaw().startsWith("$"))
+//        event.getMessage().getContentRaw().startsWith("!") ||
+        if (event.getMessage().getContentRaw().startsWith("$"))
         //Мы хотим чтобы бот обрабатывал только команды
         {
 
@@ -54,9 +54,9 @@ public class MyListener extends ListenerAdapter {
             }
             //Распознавание и выполнение аудио команды
 
-            if (event.getMessage().getContentRaw().startsWith("!"))
-            messageChannel.sendMessage(StringOutputCommands.executeCommand(args)).queue();
-            //Распознование и выполнение команды для чата
+//            if (event.getMessage().getContentRaw().startsWith("!"))
+//            messageChannel.sendMessage(StringOutputCommands.executeCommand(args)).queue();
+//            //Распознование и выполнение команды для чата
         }
     }
 }
