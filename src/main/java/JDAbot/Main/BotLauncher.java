@@ -8,10 +8,10 @@ import javax.security.auth.login.LoginException;
 
 public class BotLauncher {
 
-    ListenerAdapter currentListener;
+    public static JDA jda;
 
     public static void main(String[] args) throws LoginException {
-        JDA jda = new JDABuilder("NDkzNzA3NDMzMjk5MTQ4ODAw.Do4pGw.eZl9Iu0_GqzJS3kDvNY4KAqzXeU")
+        jda = new JDABuilder(System.getenv("JDA_BOT_TOKEN"))
                 .addEventListener(new MyListener())
                 .build();
     }

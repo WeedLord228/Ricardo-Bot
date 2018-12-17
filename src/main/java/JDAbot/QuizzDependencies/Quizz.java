@@ -13,6 +13,28 @@ public class Quizz {
     private GameState gameState;
     private Contender[] contenders;
 
+    public Round[] getGamePool() {
+        return gamePool;
+    }
+
+    public Queue<Round> getGame() {
+        return game;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public Contender[] getContenders() {
+        return contenders;
+    }
+
+    public String[] getContendersNames() {
+        return contendersNames;
+    }
+
+    private String[] contendersNames;
+
     public void setGameState(GameState gameState)
     {
         this.gameState = gameState;
@@ -33,6 +55,12 @@ public class Quizz {
     {
         this.contenders = contenders;
     }
+
+    public void setContendersNames(String[] contendersNames)
+    {
+        this.contendersNames = contendersNames;
+    }
+
 
 
 }

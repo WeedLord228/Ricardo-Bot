@@ -10,8 +10,7 @@ import java.sql.Statement;
 public class PostgreDB {
 
     public static void main(String[] args) throws URISyntaxException, SQLException {
-        createTable();
-        System.out.println("Vse norm");
+        System.out.println(System.getenv("JDA_BOT_TOKEN"));
     }
 
     private static void createTable() throws URISyntaxException, SQLException {

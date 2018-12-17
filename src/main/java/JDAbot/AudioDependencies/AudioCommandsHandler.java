@@ -1,5 +1,8 @@
 package JDAbot.AudioDependencies;
 
+import JDAbot.Main.BotLauncher;
+import JDAbot.Main.MyListener;
+import JDAbot.QuizzDependencies.QuizzRegistrationListener;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
@@ -25,6 +28,15 @@ public class AudioCommandsHandler {
             skip(args);
         if (args[0].equals("$volume"))
             setVolume(args,messageChannel);
+        if (args[0].equals("$quizz"))
+            startQuizz(messageChannel);
+    }
+
+    private void startQuizz(MessageChannel messageChannel)
+    {
+        BotLauncher.jda.addEventListener(new QuizzRegistrationListener());
+        BotLauncher.jda.removeEventListener(new MyListener());
+        messageChannel.sendMessage(("Рыба карась, игра началась!")).queue();
     }
 
     private void loadAndQueue (String[] args, final MessageChannel messageChannel)
