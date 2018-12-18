@@ -2,6 +2,8 @@ package JDAbot.AudioDependencies;
 
 import JDAbot.Main.BotLauncher;
 import JDAbot.Main.MyListener;
+import JDAbot.QuizzDependencies.GameState;
+import JDAbot.QuizzDependencies.Quizz;
 import JDAbot.QuizzDependencies.QuizzRegistrationListener;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
@@ -19,7 +21,7 @@ public class AudioCommandsHandler {
         this.discordAudioPlayer = discordAudioPlayer;
     }
 
-    public void executeCommand (String[] args,VoiceChannel voiceChannel,MessageChannel messageChannel){
+    public void executeCommand (String[] args,VoiceChannel voiceChannel,MessageChannel messageChannel,Quizz quizz){
         if (args[0].equals("$play"))
             play(args,voiceChannel,messageChannel);
         if (args[0].equals("$disconnect"))
@@ -29,13 +31,12 @@ public class AudioCommandsHandler {
         if (args[0].equals("$volume"))
             setVolume(args,messageChannel);
         if (args[0].equals("$quizz"))
-            startQuizz(messageChannel);
+            startQuizz(messageChannel, quizz);
     }
 
-    private void startQuizz(MessageChannel messageChannel)
+    private void startQuizz(MessageChannel messageChannel, Quizz quizz)
     {
-        BotLauncher.jda.addEventListener(new QuizzRegistrationListener());
-        BotLauncher.jda.removeEventListener(new MyListener());
+        quizz.setGameState(GameState.Registration);
         messageChannel.sendMessage(("Рыба карась, игра началась!")).queue();
     }
 

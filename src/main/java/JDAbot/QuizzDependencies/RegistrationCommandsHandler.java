@@ -7,22 +7,29 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 
 public class RegistrationCommandsHandler
 {
-    Quizz quizz;
 
-    public RegistrationCommandsHandler(Quizz quizz)
-    {this.quizz = quizz;}
-
-    public void executeCommand (String[] args, MessageChannel messageChannel)
+    public void executeCommand (String[] args, MessageChannel messageChannel,Quizz quizz)
     {
-        if (args[0].equals("$SetContenders"))
-            setContendersNames(args,messageChannel);
-        if (args[0].equals("$AddRound"));
-            addRound(args,messageChannel);
-        if (args[0].equals("$play"))
-            play(messageChannel);
+        if (args[0].equals("$SetContenders")) {
+            setContendersNames(args, messageChannel, quizz);
+        }
+        if (args[0].equals("$AddRound")){
+            addRound(args,messageChannel,quizz);
+        }
+        if (args[0].equals("$play")) {
+            play(messageChannel, quizz);
+        }
+        if (args[0].equals("$ping")) {
+            ping(messageChannel);
+        }
     }
 
-    private void setContendersNames(String[] args,MessageChannel messageChannel)
+    private void ping(MessageChannel messageChannel)
+    {
+        messageChannel.sendMessage("SAS TI SOS").queue();
+    }
+
+    private void setContendersNames(String[] args,MessageChannel messageChannel,Quizz quizz)
     {
         String[] tempArr = new String[args.length - 1];
         int j = 0;
@@ -36,18 +43,15 @@ public class RegistrationCommandsHandler
         messageChannel.sendMessage(quizz.getContendersNames()[0]).queue();
     }
 
-    private void addRound(String[] args,MessageChannel messageChannel)
+    private void addRound(String[] args,MessageChannel messageChannel,Quizz quizz)
     {
-        Round currentRound = new Round(args[1],args[2],args[3],Integer.parseInt(args[4]),args[5]);
-        quizz.addRound(currentRound);
+        quizz.addRound(new Round(args[1],args[2],args[3],Integer.parseInt(args[4]),args[5]));
         messageChannel.sendMessage((quizz.getCurrentRound().getQuestion())).queue();
-
     }
 
-    private void play(MessageChannel messageChannel)
+    private void play(MessageChannel messageChannel,Quizz quizz)
     {
-        BotLauncher.jda.removeEventListener(new QuizzRegistrationListener());
-        BotLauncher.jda.addEventListener(new GameListener());
-        messageChannel.sendMessage(("Рыба карась, игра началась!")).queue();
+        quizz.setGameState(GameState.Round);
+        messageChannel.sendMessage(("Рыба карась, игра сась!")).queue();
     }
 }

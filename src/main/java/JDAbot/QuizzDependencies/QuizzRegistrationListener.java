@@ -15,10 +15,11 @@ public class QuizzRegistrationListener extends ListenerAdapter
 {
     RegistrationCommandsHandler registrationCommandsHandler;
 
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
-
+        Quizz quizz = new Quizz();
         String[] args = event.getMessage().getContentRaw().split(" ");
         if (args[0].startsWith("$"))
         {
@@ -31,7 +32,7 @@ public class QuizzRegistrationListener extends ListenerAdapter
         final MessageChannel messageChannel = event.getChannel();
         //Канал, из которго пришло сообщение
 
-        registrationCommandsHandler.executeCommand(args,messageChannel);
+        registrationCommandsHandler.executeCommand(args,messageChannel,quizz);
         //Распознование и выполнение команды для чата
     }
     }

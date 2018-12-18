@@ -1,3 +1,3 @@
 package JDAbot.QuizzDependencies;
 
-enum GameState {Registration,Round,Break,End}
+public enum GameState {NoGame,Registration,Round,Break,End}
